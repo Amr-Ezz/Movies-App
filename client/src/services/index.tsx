@@ -10,9 +10,10 @@ export const fetchMovies = async () => {
     throw error;
   }
 };
+
 export const postMovie = async (movie: MovieType) => {
   try {
-        console.log("Posting movie:", movie); 
+    console.log("Posting movie:", movie);
 
     const response = await ApiClient.post(`/movies`, movie, {});
     return response.data;
@@ -44,10 +45,9 @@ export const deleteMovie = async (id: number) => {
 export const searchMovies = async (query: string) => {
   try {
     const response = await ApiClient.get(`/movies?search=${query}`);
-    return response.data.data;  
+    return response.data.data;
   } catch (error) {
     console.error("Error searching movies:", error);
     throw error;
   }
 };
-

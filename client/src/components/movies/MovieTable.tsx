@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo } from "react";
 import {
   Button,
   Form,
@@ -14,65 +14,6 @@ import { type MovieType } from "../common/Types";
 import LoadingSpinner from "../common/LoadingSpinner";
 import { useGetMovies, useEditMovie, useDeleteMovie } from "@/queries/movies";
 import { useSearchMovies } from "@/queries/movies/search";
-
-// const dummyFilms: MovieType[] = [
-//   {
-//     key: "1",
-//     title: "Inception",
-//     type: "Movie",
-//     director: "Christopher Nolan",
-//     budget: "$160M",
-//     location: "LA, Paris",
-//     duration: "148 min",
-//     year: "2010",
-//   },
-//   {
-//     key: "2",
-//     title: "Breaking Bad",
-//     type: "TV Show",
-//     director: "Vince Gilligan",
-//     budget: "$3M/ep",
-//     location: "Albuquerque",
-//     duration: "49 min/ep",
-//     year: "2008-2013",
-//   },
-//   {
-//     key: "3",
-//     title: "The Matrix",
-//     type: "Movie",
-//     director: "The Wachowskis",
-//     budget: "$63M",
-//     location: "Cyber Space",
-//     duration: "136 min",
-//     year: "1999",
-//   },
-//   {
-//     key: "4",
-//     title: "Game of Thrones",
-//     type: "TV Show",
-//     director: "Various",
-//     budget: "$10M/ep",
-//     location: "Westeros",
-//     duration: "60 min/ep",
-//     year: "2011-2019",
-//   },
-//   {
-//     key: "5",
-//     title: "Interstellar",
-//     type: "Movie",
-//     director: "Christopher Nolan",
-//     budget: "$165M",
-//     location: "Space, Earth",
-//     duration: "169 min",
-//     year: "2014",
-// ];
-
-// const originData = Array.from({ length: 100 }).map<DataType>((_, i) => ({
-//   key: i.toString(),
-//   name: `Edward ${i}`,
-//   age: 32,
-//   address: `London Park no. ${i}`,
-// }));
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
   editing: boolean;
@@ -117,12 +58,9 @@ const EditableCell: React.FC<React.PropsWithChildren<EditableCellProps>> = ({
   );
 };
 
-const PAGE_SIZE = 3;
-
 const MovieTable: React.FC = () => {
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState<number | null>(null);
-  const [loading, setLoading] = useState(false);
 
   // hooks for fetching data
 
@@ -140,8 +78,6 @@ const MovieTable: React.FC = () => {
     isPending,
     isSuccess,
   } = useSearchMovies();
-
-  
 
   const displayData = useMemo(() => {
     if (isSearchMode && isSuccess && results) {
@@ -190,11 +126,10 @@ const MovieTable: React.FC = () => {
       field?.toLowerCase().includes(searchTerm)
     );
   };
-////////////////////////////////////////
+  ////////////////////////////////////////
   const scrollDivRef = useRef<HTMLDivElement>(null);
 
-
-////// Edit Functionality
+  ////// Edit Functionality
   const isEditing = (record: MovieType) => record.id === editingKey;
 
   const edit = (record: MovieType) => {
@@ -231,7 +166,6 @@ const MovieTable: React.FC = () => {
     }
   };
 
-
   //// Delete Functionality
   const handleDelete = (id: number) => {
     deleteMovie(id, {
@@ -245,7 +179,6 @@ const MovieTable: React.FC = () => {
       },
     });
   };
-
 
   // Defining columns for the table
 
@@ -336,7 +269,7 @@ const MovieTable: React.FC = () => {
         inputType: col.dataIndex === "age" ? "number" : "text",
         dataIndex: col.dataIndex,
         title: col.title,
-        editing: isEditing(record), 
+        editing: isEditing(record),
       }),
     };
   });
@@ -405,14 +338,12 @@ const MovieTable: React.FC = () => {
               : "No movies available",
           }}
         />
-        {(loading || isLoading || isPending) && (
+
+        {(isLoading || isPending) && (
           <div className="flex justify-center py-4">
             <LoadingSpinner />
           </div>
         )}
-        {/* {!hasMore && (
-          <div className="text-center text-gray-400 py-2 text-sm">No more results</div>
-        )} */}
       </div>
     </Form>
   );
