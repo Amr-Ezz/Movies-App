@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const { config } = require('dotenv');
 const serverlessExpress = require('@vendia/serverless-express');
-const { AppDataSource } = require('./config/database');
-const movieRoutes = require('./routes/movieRoutes');
+const { AppDataSource } = require('../config/database');
+const movieRoutes = require('../routes/movieRoutes');
 
 config();
 
