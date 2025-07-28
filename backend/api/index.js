@@ -21,7 +21,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Connect to database before exporting handler
 let serverlessHandler;
 
 const setup = async () => {
