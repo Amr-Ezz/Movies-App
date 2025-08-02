@@ -6,14 +6,12 @@ config();
 
 const AppDataSource = new DataSource({
   type: 'postgres',
-  host: process.env.PGHOST || 'localhost',
-  port: parseInt(process.env.PGPORT) || 5432,
-  username: process.env.PGUSERNAME || 'root',
-  password: process.env.PGPASSWORD || 'your_password',
-  database: process.env.PGDATABASE || 'movies_db',
-  ssl: {
-    rejectUnauthorized: false
-  },
+  host: process.env.PGHOST,
+  port: parseInt(process.env.PGPORT) ,
+  username: process.env.PGUSERNAME ,
+  password: process.env.PGPASSWORD ,
+  database: process.env.PGDATABASE ,
+  ssl: true,
   synchronize: process.env.NODE_ENV === 'development',
   logging: process.env.NODE_ENV === 'development',
   entities: [Movie],
