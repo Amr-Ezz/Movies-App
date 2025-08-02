@@ -5,12 +5,15 @@ const { config } = require('dotenv');
 config();
 
 const AppDataSource = new DataSource({
-  type: 'mysql',
-  host: process.env.DB_HOST || 'localhost',
-  port: parseInt(process.env.DB_PORT) || 3306,
-  username: process.env.DB_USERNAME || 'root',
-  password: process.env.DB_PASSWORD || 'your_password',
-  database: process.env.DB_DATABASE || 'movies_db',
+  type: 'postgres',
+  host: process.env.PGHOST || 'localhost',
+  port: parseInt(process.env.PGPORT) || 5432,
+  username: process.env.PGUSERNAME || 'root',
+  password: process.env.PGPASSWORD || 'your_password',
+  database: process.env.PGDATABASE || 'movies_db',
+  ssl: {
+    rejectUnauthorized: false
+  },
   synchronize: process.env.NODE_ENV === 'development',
   logging: process.env.NODE_ENV === 'development',
   entities: [Movie],
