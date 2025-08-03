@@ -22,5 +22,11 @@ const AppDataSource = new DataSource({
   migrations: [],
   subscribers: [],
 });
+console.log({
+  host: process.env.PGHOST,
+  port: process.env.PGPORT,
+  user: process.env.PGUSERNAME,
+  database: process.env.PGDATABASE
+});
 
 module.exports = { AppDataSource };
