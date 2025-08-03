@@ -11,7 +11,9 @@ const AppDataSource = new DataSource({
   username: process.env.PGUSERNAME ,
   password: process.env.PGPASSWORD ,
   database: process.env.PGDATABASE ,
-  ssl: true,
+  ssl: {
+    rejectUnauthorized: false
+  },
   synchronize: process.env.NODE_ENV === 'development',
   logging: process.env.NODE_ENV === 'development',
   entities: [Movie],
