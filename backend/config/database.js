@@ -1,24 +1,26 @@
-const { DataSource } = require('typeorm');
-const { Movie } = require('../entities/Movie');
-const { config } = require('dotenv');
+const { DataSource } = require("typeorm");
+const { Movie } = require("../entities/Movie");
+const { config } = require("dotenv");
 
 config();
 
 const AppDataSource = new DataSource({
-  type: 'postgres',
+  type: "postgres",
   host: process.env.PGHOST,
-  port: parseInt(process.env.PGPORT) ,
-  username: process.env.PGUSERNAME ,
-  password: process.env.PGPASSWORD ,
-  database: process.env.PGDATABASE ,
-  ssl: {
-    rejectUnauthorized: false
-  },
-  synchronize: process.env.NODE_ENV === 'development',
-  logging: process.env.NODE_ENV === 'development',
+  port: parseInt(process.env.PGPORT || '5432', 10),
+  username: process.env.PGUSERNAME,
+  password: process.env.PGPASSWORD,
+  database: process.env.PGDATABASE,
+  ssl:
+    process.env.NODE_ENV === "production"
+      ? { rejectUnauthorized: false }
+      : false,
+
+  synchronize: process.env.NODE_ENV === "development",
+  logging: process.env.NODE_ENV === "development",
   entities: [Movie],
   migrations: [],
-  subscribers: []
+  subscribers: [],
 });
 
-module.exports = { AppDataSource }; 
+module.exports = { AppDataSource };
