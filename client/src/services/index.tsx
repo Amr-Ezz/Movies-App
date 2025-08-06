@@ -3,7 +3,7 @@ import ApiClient from "@lib/api";
 
 export const fetchMovies = async () => {
   try {
-    const response = await ApiClient.get(`/movies`);
+    const response = await ApiClient.get(`/api/movies`);
     return response.data.data;
   } catch (error) {
     console.error("Error fetching movies:", error);
