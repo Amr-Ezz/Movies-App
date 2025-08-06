@@ -15,7 +15,7 @@ export const postMovie = async (movie: MovieType) => {
   try {
     console.log("Posting movie:", movie);
 
-    const response = await ApiClient.post(`/movies`, movie, {});
+    const response = await ApiClient.post(`/api/movies`, movie, {});
     return response.data;
   } catch (error) {
     console.error("Error creating movie:", error);
@@ -25,7 +25,7 @@ export const postMovie = async (movie: MovieType) => {
 
 export const putMovie = async (id: number, movie: MovieType) => {
   try {
-    const response = await ApiClient.put(`/movies/${id}`, movie);
+    const response = await ApiClient.put(`/api/movies/${id}`, movie);
     return response.data;
   } catch (error) {
     console.error("Error updating movie:", error);
@@ -35,7 +35,7 @@ export const putMovie = async (id: number, movie: MovieType) => {
 
 export const deleteMovie = async (id: number) => {
   try {
-    const response = await ApiClient.delete(`/movies/${id}`);
+    const response = await ApiClient.delete(`/api/movies/${id}`);
     return response.data;
   } catch (error) {
     console.error("Error deleting movie:", error);
@@ -44,7 +44,7 @@ export const deleteMovie = async (id: number) => {
 };
 export const searchMovies = async (query: string) => {
   try {
-    const response = await ApiClient.get(`/movies?search=${query}`);
+    const response = await ApiClient.get(`/api/movies?search=${query}`);
     return response.data.data;
   } catch (error) {
     console.error("Error searching movies:", error);

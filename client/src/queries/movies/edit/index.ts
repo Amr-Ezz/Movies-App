@@ -5,7 +5,7 @@ export default function useEditMovie() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (movie: any) => {
-      const res = await ApiClient.put(`/movies/${movie.id}`, movie);
+      const res = await ApiClient.put(`/api/movies/${movie.id}`, movie);
       return res.data;
     },
     onSuccess: () => {
